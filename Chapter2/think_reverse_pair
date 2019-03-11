@@ -1,0 +1,39 @@
+思考题，nlgn时间复杂度的逆序对计算
+REVERSE-PAIR(A,p,r):
+rp = 0
+if p < r
+    q = (p + r)/2
+    rp = rp + REVERSE-PAIR(A,p,q)
+    rp = rp + REVERSE-PAIR(A,q+1,r)
+    rp = rp + MERGE(A,p,q,r)
+return rp
+
+MERGE(A,p,q,r):
+n1 = q - p + 1
+n2 = r - q
+let L[1...n1] and R[1...n2] be new array
+for i = 1 to n1
+    L[i] = A[p + i - 1]
+for j = 1 to n2
+    R[j] = A[q + j]
+i = 1
+j = 1
+rp = 0
+k = p
+while i <= n1 and j <= n2
+    if L[i] > R[j]
+        rp = rp + n2 - j + 1
+        A[k] = L[i]
+        i = i + 1
+    else A[k] = R[j]
+        j = j + 1
+    k = k + 1
+while i <= n1
+    A[k] = L[i]
+    i = i + 1
+    k = k + 1
+while j <= n2
+    A[k] = R[j]
+    j = j + 1
+    k = k + 1
+return rp
