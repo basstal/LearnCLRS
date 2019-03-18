@@ -1,8 +1,11 @@
 4.1-1
+
 返回数组中最大的负数。
 
 4.1-2
+
 暴力求解最大子数组问题
+```
 FIND-MAXIMUM-SUBARRAY(A, low ,high):
 max = -INF
 left = low
@@ -16,15 +19,18 @@ for i = low to high
             left = i
             right = j
 return (left,right, max)
-    
+```
 
 4.1-3
+
 见find_maximum_subarray_brute.c与find_maximum_subarray.c
 
 4.1-4
+
 在递归算法中，将left_max和right_max的初值改为0,最后添加判断如果结果为0,则left和right都为-1表示空子数组；
 
 4.1-5
+```
 FIND-MAXIMUM-SUBARRAY-LINEAR(A,low,high):
 oldmax = A[left]
 left = low
@@ -46,10 +52,10 @@ for i = low to high
         left = right + 1
         right = i + 1
 return (left,right,oldmax)
-
+```
 
 4.2-2
-
+```
 SQUARE-MATRIX-MULTIPLY-STRASSEN(A,B):
     n = A.rows
     let C be a new n*n matrix
@@ -78,13 +84,18 @@ SQUARE-MATRIX-MULTIPLY-STRASSEN(A,B):
         $C_{21} = P_3 + P_4$
         $C_{22} = P_5 + P_1 - P_3 - P_7$
     return C
+```
 
 4.2-7
+
 分别计算(a + b)d,(c + d)a,(a - b)c
+
 (ac - bd) == (c + d)a - (a + b)d
+
 (ad + bc) == (c + d)a - (a - b)c
 
 4.3-1
+
 $T(n) \le c(n - 1)^2 + n$
 
 $=cn^2 - 2cn + c + n$
@@ -94,6 +105,7 @@ $=cn^2 - (2c + 1)n + c$
 $\le{cn^2}(c\ge1, n > 0)$
 
 4.3-2
+
 $T(n) \le c\lg{\lceil{n/2}\rceil} + 1$
 
 $=c\lg(\frac{n}{2} + 1) + 1$
@@ -107,6 +119,7 @@ $\le c\lg{n} - c + c\lg{\frac{5}{3}} + 1 (n\ge3)$
 $\le c\lg{n} (c \ge (1-\lg{\frac{5}{3}})^{-1})$
 
 4.3-3
+
 $T(n) \ge 2c\lfloor{n/2}\rfloor \lg{\lfloor{n/2}\rfloor} + n$
 
 $\ge 2c\frac{n-1}{2} \lg{\lfloor{n/2}\rfloor} + n$
