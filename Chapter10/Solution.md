@@ -54,7 +54,40 @@ INSERT可以，DELETE不行
 
 链表，把两个链表的首尾链接起来构成一个链表包含$S_1$和$S_2$的所有元素。
 
+10.2-7
 
+用两个指针，把prev和next的指针反向链接起来，head指向最后一个元素即可。
 
-        
-        
+10.3-2
+
+与多数组表示法类似，不过是next从key下标位移+1的位置处拿到。
+
+10.3-3
+
+ALLOCATE-OBJECT不需要设置prev是将获取到的free节点插入到双向链表中时会按照插入位置初始化prev的值；FREE-OBJECT不需要重置prev是因为单链表没有使用prev中的值。
+
+10.4-2
+
+    RECURSIVE-TRAVERSE(root)
+        if root != NIL
+            print root
+            RECURSIVE-TRAVERSE(root->left)
+            RECURSIVE-TRAVERSE(root->right)
+
+10.4-3
+
+    NON-RECURSIVE-TRAVERSE(root)
+        if root == NIL
+            return
+        stack.push(root)
+        while stack not empty
+            cur = stack.pop()
+            print cur
+            if cur->left != NIL
+                stack.push(cur->left)
+            if cur-right != NIL
+                stack.push(cur->right)
+
+10.4-4
+
+与10.4-3过程一致，只是字段名有变化
