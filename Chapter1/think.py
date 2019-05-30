@@ -67,7 +67,7 @@ for key, t in times.items():
 
     print('nfactorial')
     nfactorial.append(calnfactorial(t))
-
+    
     print('finished %s, %s'%(key, t))
 
 print(lgn)
