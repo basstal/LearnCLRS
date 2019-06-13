@@ -4,65 +4,49 @@
 
 # 2.1-2
 
-插入排序
-```
-伪代码INSERTION-SORT(A)按照非升序排列：
-for j = 2 to A.length
-    key = A[j]
-    i = j – 1
-    while i > 0 and A[i] < key
-        A[i+1] = A[i]
-        i = i - 1
-    A[i+1] = key
-```
+[insertion_sort.py](./insertion_sort1.py)
 
 # 2.1-3
 
-线性查找
 ```
 LINER-FIND(A,v):
-for i = 1 to A.length
-    if A[i] == v
-        return i
-v = NIL
+    result = NIL
+    for i = 1 to A.length
+        if A[i] == v
+            result = i
+            break
+    return result
 ```
 
 循环不变式：所有下标小于i当前值的数都不是所求的下标值。
 
 初始化：该情况下i=1,下标最小，所以情况为真。
 
-保持：对于某次迭代，下标值为i，小于i的下标对应数组中的值与v都不想等，且if语句判断当前下标对应数组中的值A[i]与v的相等性，如果相等则程序返回下标值i，即所求的值，否则迭代继续执行，此时下标值比上次迭代下标值大1,且所有小于该下标值的数组中值都不与v相等。
+保持：对于某次迭代，下标值为i。小于i的下标对应数组中的值与v都不相等，且if语句判断当前下标对应数组中的值A[i]与v的相等性。如果相等则程序返回下标值i，即所求的值，否则迭代继续执行。此时下标值比上次迭代下标值大1，且所有小于该下标值的数组中值都不等于v。
 
-终止：当下标值大于数组长度时终止，此时所有小于该下标值的数组中对应位置的值都与v不相等，按要求置v=NIL。
+终止：当下标值大于数组长度时终止，此时所有小于该下标值的数组中的值都不等于v，按要求返回NIL。
 
 # 2.1-4
 
-输入：两个代表二进制的序列A和B，其中A=<a1,a2,…,an>,B=<b1,b2,…,bn>，a1~an和b1~bn取值范围为{0,1}。
+输入：两个代表n位二进制数的序列A和B，其中$A=<a_1,a_2,…,a_n>$，$B=<b_1,b_2,…,b_n>$。
 
-输出：一个代表二进制的序列C，其中C=<c1,c2,…,cn,cn+1>,c1~cn+1取值范围为{0,1}。
+输出：一个代表n+1位二进制数的序列C，其中$C=<c_1,c_2,…,c_n,c_{n+1}>$。
 
-将两个二进制数组A和B相加得到二进制数组C
 ```
 ADD(A,B):
-inc = 0
-for i = A.length to 1
-    if A[i] + B[i] == 2
-        if  inc == 1
-            C[i+1] = 1
-        else C[i+1] = 0
-        inc = 1
-    elseif A[i] + B[i] == 1
-        if  inc == 1
-            C[i+1] = 0
-        else C[i+1] = 1
+    result = 0
+    for i = A.length downto 1
+        mvbit = A.length - i
+        bitn = 1 << mvbit
+        result = result + A[i] * bitn + B[i] * bitn
+        C[i] = (result >> mvbit) % 2
+    if result > (1 << A.length)
+        C[1] = 1
     else
-        if  inc == 1
-            C[i+1] = 1
-            inc = 0
-        else C[i+1] = 0
-C[i] = inc
-return C
+        C[1] = 0
 ```
+
+[add.py](./add.py)
 
 # 2.2-2
 
