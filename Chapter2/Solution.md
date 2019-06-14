@@ -48,32 +48,40 @@ ADD(A,B):
 
 [add.py](./add.py)
 
+# 2.2-1
+
+$\Theta({n^3})$
+
 # 2.2-2
 
-选择排序
 ```
 SELECTION-SORT(A):
-for i = 1 to A.length-1
-    key = A[i]
-    j = i
-    min = A[j]
-    for idx = j+1 to A.length
-        if min > A[idx]
-            j = idx
-            min = A[idx]
-    A[i] = A[j]
-    A[j] = key
+    for i = 1 to A.length-1
+        toSwap = A[i]
+        for idx = i + 1 to A.length
+            if A[i] > A[idx]
+                A[i] = A[idx]
+                A[idx] = toSwap
+                toSwap = A[i]
 ```
 
 循环不变式：每次循环结束后将序列中第i小的元素放置在序列的第i个位置上
 
 因为循环不变式，算法只需要n-1次循环将前n-1小的元素按序放置在前n-1个位置上，于是自然有第n个位置放置的是第n小（即最大）的元素。
 
-2.2-4
+最好与最坏情况运行时间都是：$\Theta({n^2})$
 
-降低一个算法的高阶项的增长率。
+# 2.2-3
 
-2.3-1
+平均需要检查数组一半的元素：$\Theta({n^2})$
+
+最坏需要检查全部的元素：$\Theta({n^2})$
+
+# 2.2-4
+
+从算法上，降低常量因子的值，即使用尽量少的步长来执行算法逻辑。
+
+# 2.3-1
 
 做图过程略；
 
