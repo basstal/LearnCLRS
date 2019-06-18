@@ -97,31 +97,42 @@ n=2时成立；
 
 $T(n + 1) = 2T(\frac{n + 1}{2}) + n + 1$
 
-2.3-4
+$T(n + 1) = 2\frac{n+1}{2}\log_2{\frac{n+1}{2}}+n + 1$
 
-公式略；
+$T(n + 1) = (n + 1)\log_2{(n+1)} - (n + 1) + (n + 1)$
 
-2.3-5
+$T(n + 1) = (n + 1)\log_2{(n+1)}$
 
-二分查找
+# 2.3-4
+
+$$
+T(n) = \begin{cases}
+   \Theta(1) &\text{若 } n = 1 \\
+   T(n - 1) + \Theta(n) &\text{若 } n > 1
+\end{cases}
+$$
+
+# 2.3-5
+
 ```
-BINARY_SEARCH(A,v)迭代版本:
-low = 1
-high = A.length
-while low <= high
-    mid = (low + high) / 2
-    if A[mid] == v
-        return mid
-    elseif A[mid] < v
-        low = mid + 1
-    else high = mid - 1
-v = NIL
+BINARY-SEARCH(A,v):
+    low = 1
+    high = A.length
+    while low <= high
+        mid = (low + high) / 2
+        if A[mid] == v
+            return mid
+        elseif A[mid] < v
+            low = mid + 1
+        else 
+            high = mid - 1
+    v = NIL
 ```
 
-2.3-6
+# 2.3-6
 
 理论上可行，但没有合适的数据结构，在插入时需要移动插入位置之后的元素，如果使用数组则挪动元素还是需要与n线性相关的时间，如果使用链表则不能使用直接下标索引来进行二分查找，而遍历链表需要的也是n线性相关的时间。
 
-2.3-7
+# 2.3-7
 
 设a+b=x,a和b都属于S，算法对于任意的a属于S，二分查找x-b。
