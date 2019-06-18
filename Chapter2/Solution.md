@@ -83,42 +83,19 @@ SELECTION-SORT(A):
 
 # 2.3-1
 
-做图过程略；
+略。
 
-2.3-2
+# 2.3-2
 
-归并排序的合并过程
-```
-MERGE(A,p,q,r):
-n1 = q - p + 1
-n2 = r - q
-let L[1...n1] and R[1...n2] be new array
-for i = 1 to n1
-    L[i] = A[p + i - 1]
-for j = 1 to n2
-    R[j] = A[q + i]
-i = 1
-j = 1
-k = p
-while i <= n1 and j <= n2
-    if L[i] <= R[j]
-        A[k] = L[i]
-        i = i + 1
-    else A[k] = R[j]
-        j = j + 1
-    k = k + 1
-while i <= n1
-    A[k] = L[i]
-    i = i + 1
-    k = k + 1
-while j <= n2
-    A[k] = R[j]
-    j = j + 1
-    k = k + 1
-```
-2.3-3
+[merge_sort.py](./merge_sort.py)
 
-已证明；
+# 2.3-3
+
+n=2时成立；
+
+假设$T(n)=n\log_2{n}$成立;
+
+$T(n + 1) = 2T(\frac{n + 1}{2}) + n + 1$
 
 2.3-4
 
