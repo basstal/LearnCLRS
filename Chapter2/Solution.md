@@ -87,7 +87,7 @@ SELECTION-SORT(A):
 
 # 2.3-2
 
-[merge_sort.py](./merge_sort.py)
+[merge.py](./merge.py)
 
 # 2.3-3
 
