@@ -288,4 +288,7 @@ DerivedData/
 !default.perspectivev3
 
 
+## others
 OpenGLResource/
+.vscode
+.code-workspace
