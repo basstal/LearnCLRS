@@ -1,10 +1,10 @@
 # 2.1-1
 
-[insertion_sort.py](../Function/Sort/insertion_sort.py)
+[insertion_sort.py](./Resources/insertion_sort.py)
 
 # 2.1-2
 
-[insertion_sort.py](./insertion_sort1.py)
+[insertion_sort1.py](./Resources/insertion_sort1.py)
 
 # 2.1-3
 
@@ -46,7 +46,7 @@ ADD(A,B):
         C[1] = 0
 ```
 
-[add.py](./add.py)
+[add.py](./Resources/add.py)
 
 # 2.2-1
 
@@ -87,7 +87,7 @@ SELECTION-SORT(A):
 
 # 2.3-2
 
-[merge.py](./merge.py)
+[merge.py](./Resources/merge.py)
 
 # 2.3-3
 

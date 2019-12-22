@@ -47,12 +47,12 @@
 
 # 1.2-2
 
-[test.py](./test.py)
+[test.py](./Resources/test.py)
 
 # 1.2-3
 
-[test1.py](./test1.py)
+[test1.py](./Resources/test1.py)
 
 # 思考题1-1
 
-[think.py](./think.py)
+[think.py](./Resources/think.py)
