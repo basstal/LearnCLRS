@@ -10,6 +10,7 @@ times = {
     "year": 31104000000,
     "centary": 3110400000000,
 }
+jump = [1, 10, 100, 1000, 10000, 100000]
 
 lgn = "|"
 sqrtn = "|"
@@ -26,23 +27,22 @@ lastBasenlogn = 0
 
 
 def calnlgn(val):
-    jump = [1, 10, 100, 1000, 10000, 100000]
     global basenlgn
     global lastBasenlogn
-    while basenlgn * math.log2(basenlgn) < val:
+    max = len(jump) - 1
+    while max >= 0 and basenlgn * math.log2(basenlgn) < val:
         lastBasenlogn = basenlgn
-        basenlgn = basenlgn + jump[random.randint(0, 5)]
-    for i in range(1, basenlgn - lastBasenlogn):
-        examine = basenlgn - i
-        if examine * math.log2(examine) <= val:
+        basenlgn += jump[max]
+        if basenlgn * math.log2(basenlgn) > val:
+            max -= 1
             basenlgn = lastBasenlogn
-            return examine
-
+            
+    return lastBasenlogn
 
 def calnfactorial(val):
     global basenfactorial
     while math.factorial(basenfactorial) < val:
-        basenfactorial = basenfactorial + 1
+        basenfactorial += 1
     if math.factorial(basenfactorial) == val:
         return basenfactorial
     return basenfactorial - 1
