@@ -281,7 +281,7 @@ d. $1 \leq k\leq \lg n$，且使$abs(2^kk - n)$最小的k。
 
 Q：（冒泡排序的正确性）冒泡排序是一种流行但低效的排序算法，它的作用是反复交换相邻的未按次序排列的元素。
 
-![BubbleSort.png](PseudoCode/BubbleSort.png)
+![BubbleSort.png](Resources/BubbleSort.png)
 
 a. 假设$A'$表示BUBBLESORT(A)的输出。为了证明BUBBLESORT正确，我们必须证明它将终止并且有：
 
@@ -327,7 +327,7 @@ d. 冒泡排序的最坏情况运行时间为$\Theta{(n^2)}$，在最坏情况�
 
 Q：（霍纳(Horner)规则的正确性）给定系数$a_0,a_1,...,a_n$和$x$的值，代码片段
 
-![Horner.png](PseudoCode/Horner.png)
+![Horner.png](Resources/Horner.png)
 
 实现了用于求值多项式
 $$P(x)=\sum_{k=0}^{n}{a_kx^k}=a_0+x(a_1+x(a_2+...+x(a_{n-1}+xa_n)...))$$
