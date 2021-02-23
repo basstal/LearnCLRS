@@ -1,5 +1,7 @@
 import math
 
+reverse_pair = []
+
 def reverse_order_pair(A, p, r):
     rp = 0
     if p < r:
@@ -27,6 +29,8 @@ def reverse_order_merge(A,p,q,r):
     for k in range(p, r + 1):
         # print("{0}, {1}, {2}".format(k, i, j))
         if L[i] > R[j]:
+            for l in range(j, n2):
+                reverse_pair.append("({0}, {1})".format(L[i], R[l]))
             rp = rp + n2 - j
             A[k] = L[i]
             i = i + 1
@@ -37,7 +41,10 @@ def reverse_order_merge(A,p,q,r):
 
 def main():
     A = [7, 2, 3, 8, 6, 1]
+    # A = [2, 3, 7, 1, 6, 8]
+    reverse_pair.clear()
     print(reverse_order_pair(A, 0, len(A) - 1))
+    print(reverse_pair)
 
 
 main()
