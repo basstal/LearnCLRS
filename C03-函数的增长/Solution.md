@@ -203,6 +203,136 @@ Q：
 
 ![ThinkP3-1.png](Resources/ThinkP3-1.png)
 
+A：要证明$p(n)=\Omicron(n^k),k\geq{d}$。即存在正常量$c,n_0$，使得：
+$$\sum_{i=0}^{d}{a_in^i}\leq{cn^d},n\geq{n_0}$$
+$$a_0+a_1n+a_2n^2+...+a_dn^d\leq{cn^d}$$
+$$c=a_d+b\geq{a_d+\frac{a_{d-1}}{n}+\frac{a_{d-2}}{n^2}+...+\frac{a_0}{n^d}}$$
+$$b\geq{\frac{a_{d-1}}{n}+\frac{a_{d-2}}{n^2}+...+\frac{a_0}{n^d}}$$
+当$b=1$时，存在$n_0=max(da_{d-1},d\sqrt{a_{d-2}},d\sqrt[3]{a_{d-3}},...,d\sqrt[d]{a_0})$。因此有$c,n_0$使得$p(n)\leq{cn^d},n\geq{n_0}$。
+$b=-1$时可证明$p(n)=\Omega({n^k})$，其他同理。
+
+------------------------------------
+
+## 思考题3-2
+
+Q：（相对渐近增长）为下表中的每对表达式$(A, B)$指出$A$是否是$B$的$\Omicron、\omicron、\Omega、\omega或\Theta$。假设$k\geq{1}、\epsilon\gt{0}、c\gt{1}$均为常量。回答应该以表格的形式，将“是”或“否”写在每个空格中。
+
 A：
+
+| A            | B             | $\Omicron$ | $\omicron$ | $\Omega$ | $\omega$ | $\Theta$ |
+| ------------ | ------------- | ---------- | ---------- | -------- | -------- | -------- |
+| $\lg^k{n}$   | $n^k$         | 是         | 是         | 否       | 否       | 否       |
+| $n^k$        | $c^n$         | 是         | 是         | 否       | 否       | 否       |
+| $\sqrt{n}$   | $n^{\sin{n}}$ | 否         | 否         | 否       | 否       | 否       |
+| $2^n$        | $2^{n/2}$     | 否         | 否         | 是       | 是       | 否       |
+| $n^{\lg{c}}$ | $c^{\lg{n}}$  | 是         | 否         | 是       | 否       | 是       |
+| $\lg(n!)$    | $\lg(n^n)$    | 是         | 否         | 是       | 否       | 是       |
+
+------------------------------------
+
+## 思考题3-3
+
+Q：
+
+![ThinkP3-3.png](Resources/ThinkP3-3.png)
+
+A：
+
+a. 
+$$2^{{2}^{n+1}}$$
+$$2^{2^{n}}$$
+$$(n+1)!$$
+$$n!$$
+$n!$性质$n!=\omicron(n^n),n!=\omega{(2^n)}$
+$$e^n$$
+$$n\cdot{2^n}$$
+$$2^n$$
+$$(3/2)^n$$
+$$(\lg{n})^{\lg{n}}=n^{\lg{\lg{n}}}$$
+$$(\lg{n})!$$
+$$n^3$$
+$$n^2=4^{\lg{n}}$$
+$$n\lg{n}=\lg{n!}$$
+$$n=2^{\lg{n}}$$
+$$\sqrt{2}^{\lg{n}}$$
+$$2^{\sqrt{2\lg{n}}}$$
+（任意正的多项式函数都比任意多对数函数增长得快）
+$$\lg^{2}n$$
+$$\ln{n}$$
+$$\sqrt{\lg{n}}$$
+$$\ln{\ln{n}}$$
+$$2^{\lg^{*}{n}}$$
+$$\lg^{*}{n}=\lg^{*}{\lg{n}}$$
+$$\lg(\lg^{*}{n})$$
+$$n^{1/\lg{n}}(=2)和1$$
+
+b. 
+
+$$f(n)=\begin{cases} 
+2^{2^{n}} &\text{if n mod 2 = 0}\\
+0 &\text{if n mod 2 = 1}
+\end{cases}$$
+
+------------------------------------
+
+## 思考题3-4
+
+Q：（渐近记号的性质）假设$f(n)$和$g(n)$为渐近正函数。证明或反驳下面的每个猜测。
+
+A：
+
+a. $f(n)=\Omicron(g(n))$蕴涵$g(n)=\Omicron(f(n))$。
+
+设$f(n)=n,g(n)=n^3$，显然$n^3=\Omicron(n)$不成立，因此不成立。
+
+b. $f(n)+g(n)=\Theta(min(f(n), g(n)))$。
+
+设$f(n)=n,g(n)=n^3,f(n)+g(n)=n^3+n=\Theta(n^3)\neq\Theta(min(f(n),g(n))$，因此不成立。
+
+c. $f(n)=\Omicron(g(n))$蕴涵$\lg(f(n))=\Omicron(\lg(g(n)))$，其中对所有足够大的$n$，有$\lg(g(n))\geq1$且$f(n)\geq1$。
+
+(3.2-4)已证。
+
+d. $f(n)=\Omicron(g(n))$蕴涵$2^{f(n)}=\Omicron(2^{g(n)})$
+
+设$2n=\Omicron(n),2^{2n}=4^{n}\neq{\Omicron(2^n)}$，因此不成立。
+
+e. $f(n)=\Omicron((f(n))^2)$。
+
+设$f(n)=1/2n\neq{\Omicron(1/4n^2)}$，因此不成立。
+
+f. $f(n)=\Omicron(g(n))$蕴涵$g(n)=\Omega(f(n))$。
+
+对于$f(n)\leq{c_0g(n)}$，$c_1=1/c_0$，使得$g(n)\geq{c_1g(n)}$。
+
+g. $f(n)=\Theta(f(n/2))$。
+
+设$n=2^n,c_1\sqrt{2}^n\leq{2^n\leq{c_2\sqrt{2}^n}}$，不等式不成立。
+
+h. $f(n)+\omicron(f(n))=\Theta(f(n))$。
+
+令$g(n)=\omicron(f(n))$，有$0\leq{g(n)}\lt{cf(n)}$对任意$c$成立，上式$c_0f(n)\leq{f(n)+g(n)}\leq{c_1f(n)}$，取$c_0=1,c_1=2$即满足$f(n)+o(f(n))=\Theta(f(n))$。
+
+------------------------------------
+
+## 思考题3-5
+
+Q：
+
+![ThinkP3-5.png](Resources/ThinkP3-5.png)
+
+A：
+
+
+
+
+
+
+
+
+
+
+
+
 
 
