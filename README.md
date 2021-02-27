@@ -1,9 +1,8 @@
-# CLRS-Solution 3rd Edition #
+# CLRS-Solution 3rd Edition
 
 算法导论 第三版 练习题
 
 解答及python实现
-
 
 **数学表达式使用[katex](https://khan.github.io/KaTeX/)**
 
@@ -14,3 +13,10 @@
 [https://walkccc.me/CLRS/](https://walkccc.me/CLRS/)
 
 [https://blog.csdn.net/yangtzhou/article/details/89098309](https://blog.csdn.net/yangtzhou/article/details/89098309)
+
+
+-------------------
+
+未完成习题：
+
+C03：思考题3-5、思考题3-6。

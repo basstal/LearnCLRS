@@ -321,12 +321,13 @@ Q：
 
 ![ThinkP3-5.png](Resources/ThinkP3-5.png)
 
-A：
+------------------------------------
 
+## 思考题3-6
 
+Q：
 
-
-
+![ThinkP3-6.png](Resources/ThinkP3-6.png)
 
 
 
