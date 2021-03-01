@@ -255,8 +255,38 @@ Q：证明：归并排序的“严格”递归式(4.3)的解为$\Theta(n\lg n)$
 
 A：
 
+证明(4.3)满足$T(n)\leq c(n-2)\lg(n-2)$
 
+$T(n)\leq c(\lceil{n/2}\rceil-2)\lg(\lceil{n/2}\rceil-2)+c(\lfloor{n/2}\rfloor-2)\lg(\lfloor{n/2}\rfloor-2)+kn$
 
+$\leq c(n/2+1-2)\lg(n/2+1-2)+c(n/2-1)\lg(n/2-1)+kn$
 
+$= 2c(n/2-1)\lg(n/2-1)+kn$
+
+$= c(n-2)\lg(n-2)+2c+(k-c)n$
+
+$\leq c(n-2)\lg(n-2)$，当$c\gt k$时成立。有$T(n)=\Omicron(n\lg n)$。
+
+证明(4.3)满足$T(n)\geq c(n+2)\lg(n+2)$
+
+$T(n)\geq c(\lceil{n/2}\rceil+2)\lg(\lceil{n/2}\rceil+2)+c(\lfloor{n/2}\rfloor+2)\lg(\lfloor{n/2}\rfloor+2)+kn$
+
+$\geq c(n/2-1+2)\lg(n/2-1+2)+c(n/2+1)\lg(n/2+1)+kn$
+
+$=2c(n/2+1)\lg(n/2+1)+kn$
+
+$=c(n+2)\lg(n+2)-2c+(k-c)n$
+
+$\geq c(n+2)\lg(n+2)$，当$c\lt k$时成立。有$T(n)=\Omega(n\lg n)$。
+
+因此(4.3)的解为$\Theta(n\lg n)$。
+
+--------------------------------------
+
+## 4.3-6
+
+Q：证明：$T(n)=2T(\lfloor{n/2}\rfloor + 17)+n$的解为$\Omicron(n\lg n)$。
+
+A：
 
 
