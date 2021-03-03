@@ -499,6 +499,30 @@ $\leq cn^2$，当$a\gt2,n>2a$时成立
 
 --------------------------------------
 
+## 4.4-9
+
+Q：对递归式$T(n)=T(\alpha n)+T((1-\alpha)n)+cn$，利用递归树给出一个渐近紧确解，其中$0<\alpha<1$和$c>0$是常数。
+
+A：递归式$T(n)=T(\alpha n)+T((1-\alpha)n)+cn$对于第$i$层子问题总规模为$cn(\alpha+(1-\alpha))^i$，深度为$\lg n$，叶节点总数为$n$。因此有
+
+$T(n)=cn\lg n + \Theta(n)=\Theta(n\lg n)$
+
+对于$\Omicron(n\lg n)$，证明$T(n)\leq c(n\lg n - dn)$
+
+$T(n)\leq c(\alpha n\lg {\alpha n}-d\alpha n)+c((1-\alpha) n\lg {(1-\alpha) n}-d(1-\alpha) n)+cn$
+
+$= c\alpha n\lg {\alpha n}-cd\alpha n+cn\lg{(1-\alpha)n}-c\alpha n\lg{(1-\alpha)n}-cdn+c\alpha n+cn$
+
+$= c\alpha n\lg {\alpha}+c\alpha n\lg n - cd\alpha n+cn\lg{(1-\alpha)}+cn\lg n-c\alpha n\lg(1-\alpha)-c\alpha n\lg n-cdn+c\alpha n+cn$
+
+$=cn\lg n - cdn + c\alpha n\lg{\frac{\alpha}{1-\alpha}}+cn\lg(1-\alpha)+(\alpha + 1 - d\alpha)n$
+
+$\leq cn\lg n -cdn$，当$\alpha \leq 1/2,d > 1+ 1/\alpha$时成立。
+
+对于$\Omega(n\lg n)$，证明$T(n)\geq c(n\lg n-dn)$，推导同上，当$0 < d < \frac{c\alpha \lg {\alpha}+c(1-\alpha) \lg(1-\alpha)+\alpha + 1}{\alpha}$时成立。
+
+--------------------------------------
+
 ## 4.5-1
 
 Q：对下列递归式，使用主方法求出渐近紧确界。
@@ -544,4 +568,20 @@ A：递归式$T(n)=T(n/2)+\Theta(1)$，$a=1,b=2,f(n)=\Theta(1)$，因此有$n^{\
 Q：主方法能应用于递归式$T(n)=4T(n/2)+n^2\lg n$吗？请说明为什么可以或者为什么不可以。给出这个递归式的一个渐近上界。
 
 A：不可以应用主方法，因为$f(n)=n^2\lg n=\Omega(n^{\lg 4})$，但不是多项式意义上的大于，即不存在常数$\epsilon\gt 0$，有$f(n)=\Omega(n^{2+\epsilon})$。
+
+证明$T(n)=\Omicron(n^2\lg^2n)$，即$T(n)\leq cn^2\lg^2n$
+
+$T(n)\leq 4c(n/2)^2\lg^2(n/2)+n^2\lg n$
+
+$=cn^2(\lg n - 1)^2+n^2\lg n$
+
+$=cn^2\lg^2n+n^2(c+(1-2c)\lg n)$
+
+$\leq cn^2\lg^2n$，当$c>1/2$时成立。
+
+--------------------------------------
+
+## 4.5-5
+
+Q：考虑主定理情况3的一部分：对某个常数$c<1$，正则条件$af(n/b)\leq cf(n)$是否成立。给出一个例子，其中常数$a\geq 1,b>1$且函数$f(n)$满足主定理情况3中除正则条件外的所有条件。
 
