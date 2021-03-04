@@ -12,7 +12,7 @@ INSERT可以，DELETE不行
 
 10.2-4
 
-暂时令L.nil的key为k，在最后判断x和L.nil是否为同一个节点即可。
+暂时令L.nil的key为k，在最后判断x和L.nil是否为同一个结点即可。
 
 10.2-5
 
@@ -64,7 +64,7 @@ INSERT可以，DELETE不行
 
 10.3-3
 
-ALLOCATE-OBJECT不需要设置prev是将获取到的free节点插入到双向链表中时会按照插入位置初始化prev的值；FREE-OBJECT不需要重置prev是因为单链表没有使用prev中的值。
+ALLOCATE-OBJECT不需要设置prev是将获取到的free结点插入到双向链表中时会按照插入位置初始化prev的值；FREE-OBJECT不需要重置prev是因为单链表没有使用prev中的值。
 
 10.4-2
 
