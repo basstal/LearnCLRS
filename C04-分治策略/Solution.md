@@ -691,4 +691,48 @@ a. $T(n)=4T(n/3)+n\lg n$
 
 b. $T(n)=3T(n/3)+n/\lg n$
 
-           
+c. $T(n)=4T(n/2)+n^2\sqrt n$
+
+根据主定理情况3，解为$\Theta(n^2\sqrt n)$。
+
+d. $T(n)=3T(n/3-2)+n/2$
+
+$T(n/3-2)$中的-2可以剔除，因为对于足够大的$n$，常数项的改变与除法相比可以忽略。因此根据主定理2，解为$\Theta(n\lg n)$。
+
+e. $T(n)=2T(n/2)+n/\lg n$
+
+f. $T(n)=T(n/2)+T(n/4)+T(n/8)+n$
+
+猜测解$T(n)=\Theta(n)$
+
+证明$T(n)\leq cn$
+
+$T(n)\leq cn/2 + cn/4+cn/8+n$
+
+$\leq \frac{7}{8}cn + n \leq cn$，当$c \geq 8$时成立。
+
+同理可证$T(n)\geq cn$，当$c \leq 8$时成立。
+
+g. $T(n)=T(n-1)+1/n$
+
+根据递归树有和式$T(n)=1+1/2+...+1/(n-1)+1/n$
+
+$T(n)=(1+1/n)+(1/2+1/(n-1))... \leq n/2\cdot (n+1)/n=(n+1)/2$
+
+猜测递归式的解为$\Theta(n)$
+
+证明$T(n)\leq cn$，代入得
+
+$T(n)\leq c(n-1)+1/n=cn-c+1/n$
+
+$\leq cn$，当$c\geq 1$时成立。
+
+同理可证$T(n)\geq c(n-1/n)$，当$c\geq 1$时成立。
+
+h. $T(n)=T(n-1)+\lg n$
+
+根据递归树有和式$T(n)=\lg n + \lg (n-1)+\lg (n-2)+...+\lg 1=\lg n!=\Theta(n\lg n)$。
+
+i. $T(n)=T(n-2)+1/\lg n$
+
+j. $T(n)=\sqrt nT(\sqrt n)+n$
