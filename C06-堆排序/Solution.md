@@ -323,7 +323,12 @@ A：
 --------------------------------------
 
 ## 6.5-6
-```
+
+Q：在HEAP-INCREASE-KEY的第5行的交换操作中，一般需要通过三次赋值来完成。想一想如何利用INSERTION-SORT内循环部分的思想，只用一次赋值就完成这一交换操作？
+
+A：
+
+```code
 HEAP-INCREASE-KEY(A, i, key)
     if A[i] > key
         error "new key is smaller than current key"
@@ -338,15 +343,24 @@ HEAP-INCREASE-KEY(A, i, key)
 
 ## 6.5-7
 
-以时间顺序为key，构造一个最小优先队列，入队用MIN-HEAP-INSERT，出队用HEAP-EXTRACT-MIN
+Q：试说明如何使用优先队列来实现一个先进先出队列，以及如何使用优先队列来实现栈。（队列和栈的定义见10.1节。）
 
-以时间顺序为key，构造一个最大优先队列，入队用MAX-HEAP-INSERT，出队用HEAP-EXTRACT-MAX
+A：
+
+实现栈，以入队列的时间顺序为key，构造一个最小优先队列，入队用MIN-HEAP-INSERT，出队用HEAP-EXTRACT-MIN。
+
+实现先进先出队列，以入队列的时间顺序为key，构造一个最大优先队列，入队用MAX-HEAP-INSERT，出队用HEAP-EXTRACT-MAX。
 
 --------------------------------------
 
 
 ## 6.5-8
-```
+
+Q：$HEAP-DELETE(A, i)$操作能够将结点$i$从堆A中删除。对于一个包含$n$个元素的堆，请设计一个能够在$\Omicron(\lg n)$时间内完成的HEAP-DELETE操作。
+
+A：
+
+```code
 HEAP-DELETE(A, i)
     if i > A.heap-size
         error "index out of range"
@@ -360,14 +374,176 @@ HEAP-DELETE(A, i)
 
 ## 6.5-9
 
-思路：
+Q：请设计一个时间复杂度为$\Omicron(n\lg k)$的算法，它能够将$k$个有序链表合并为一个有序链表，这里$n$是所有输入链表包含的总的元素个数。（提示：使用最小堆来完成$k$路归并。）
 
-A.以k个有序链表的首元素作为key，构造一个最小堆(BUILD-MIN-HEAP)
+A：
 
-B.取走最小堆堆顶的元素，即该链表的首元素，此时堆顶元素变为该链表的下一个元素，若没有下一个元素，则删除该结点
+步骤：
 
-C.对堆顶调用MIN-HEAPIFY，维持最小堆性质
+1. 以k个有序链表的首元素作为key，构造一个最小堆(BUILD-MIN-HEAP)。
+2. 取走最小堆堆顶的元素，即归并链表的首元素，此时堆顶元素变为该链表的下一个元素，若没有下一个元素，则删除该结点。
+3. 对堆顶调用MIN-HEAPIFY，维持最小堆性质。
+4. 重复过程2，直到堆中没有任何结点为止。
+5. 按取走顺序构成的链表即为归并结果链表，最终时间复杂度为调用$n$（所有输入链表包含的总的元素个数）次MIN-HEAPIFY（$\lg k$）的时间，即$\Omicron(n \lg k)$。
 
-D.重复过程B，直到堆中没有任何结点为止
+--------------------------------------
 
-E.按取走顺序构成的链表即为归并结果链表
+## 思考题6-1
+
+Q：
+
+![ThinkP6_1.jpg](Resources/ThinkP6_1.jpg)
+
+A：
+
+a.
+
+不一样，例如对输入数据<1,2,3,4,5,6,7,8,9>，
+
+$BUILD-MAX-HEAP$结果为<9,8,7,4,5,6,3,2,1>
+
+$BUILD-MAX-HEAP'$结果为<9,8,6,7,3,2,5,1,4>
+
+b.
+
+上界易得；证明下界，HEAP-INCREASE-KEY在最坏情况下，即每次插入的值都大于根结点的值，得到HEAP-INCREASE-KEY的下界$\lg{n}$，MAX-HEAP-INSERT执行$n-1$次，可得$\Omega(n\lg{n})$。
+
+综上时间复杂度为$\Theta(n\lg{n})$。
+
+--------------------------------------
+
+## 思考题6-2
+
+Q：
+
+![ThinkP6_2.jpg](Resources/ThinkP6_2.jpg)
+
+A：
+
+a.
+
+```code
+d-ARRAY-PARENT(i)
+    return floor((i + d - 2) / d)
+
+d-ARRAY-CHILD(i, c)
+    return (i - 1) * d + 1 + c
+```
+
+b. 高度为$\Theta(\log_d{n})$。
+
+c.
+
+```code
+d-ARRAY-MAX-HEAPIFY(A, i)
+    largest = i
+    for k = 1 to d
+        if d-ARRAY-CHILD(i, k) <= A.heap-size and A[d-ARRAY-CHILD(i, k)] > A[largest]
+            largest = d-ARRAY-CHILD(i, k)
+    if largest != i
+        exchange A[i] with A[largest]
+        d-ARRAY-MAX-HEAPIFY(A, largest)
+```
+
+```code
+d-ARRAY-EXTRACT-MAX(A)
+    if A.heap-size < 1
+        error "heap underflow"
+    max = A[1]
+    exchange A[1] with A[A.heap-size]
+    A.heap-size = A.heap-size - 1
+    d-ARRAY-MAX-HEAPIFY(A, 1)
+    return max
+```
+每次d-ARRAY-MAX-HEAPIFY中for循环执行d次，从根结点到叶结点总计调用$\log_b{n}$次d-ARRAY-MAX-HEAPIFY过程，因此时间复杂度$\Omicron(d\log_d{n})$。
+
+d. 
+```code
+INSERT(A, key)
+    A.heap-size = A.heap-size + 1
+    A[A.heap-size] = key
+    i = A.heap-size
+    while i > 1 and A[d-ARRAY-PARENT(i)] < A[i]
+        exchange A[d-ARRAY-PARENT(i)] with A[i]
+        i = d-ARRAY-PARENT(i)
+```
+
+时间复杂度为$\Omicron(\log_b n)$。
+
+e.
+```code
+INCREASE-KEY(A, i, key)
+    if k < A[i]
+        error "new key is smaller than current key"
+    while i > 1 and A[d-ARRAY-PARENT(i)] < key
+        A[i] = A[d-ARRAY-PARENT(i)]
+        i = d-ARRAY-PARENT(i)
+    A[i] = key
+```
+
+时间复杂度为$\Omicron(\log_b n)$。
+
+--------------------------------------
+
+## 思考题6-3
+
+Q：
+
+![ThinkP6_3.jpg](Resources/ThinkP6_3.jpg)
+
+A：
+
+a.
+
+|          |          |          |          |
+| -------- | -------- | -------- | -------- |
+| 2        | 3        | 4        | 5        |
+| 8        | 9        | 12       | 14       |
+| 16       | $\infty$ | $\infty$ | $\infty$ |
+| $\infty$ | $\infty$ | $\infty$ | $\infty$ |
+
+b. 
+
+利用反证法，假设$Y[1,1] = \infty$时，Y中有不为$\infty$的值$d$。则该值所在的行A必有$Y[A, 1] \leq d$，此时$Y[A, 1] < Y[1, 1]$，不满足Young氏矩阵的性质。所以Y中没有不为$\infty$的值，因此Y为空。
+
+同理可证，当$Y[m,n] < \infty$，Y为满。
+
+c.
+
+```code
+EXTRACT-MIN(Y, m, n)
+    if m < 1 or n < 1
+        return INF
+    min = Y[1, 1]
+    v1 = EXTRACT-MIN(Y, m - 1, n)
+    v2 = EXTRACT-MIN(Y, m, n - 1)
+    if v1 < v2
+        Y[1, 1] = v1
+    else
+        Y[1, 1] = v2
+    return min
+```
+
+$T(p)=2T(p-1)+\Omicron(1)$，根据递归树得到解为$m+n-1$，因此结果为$\Omicron(m+n)$。
+
+d. 过程同上。开始时调用在$Y[m, n]$位置，比较$Y[m - 1, n]$、$Y[m, n - 1]$与新元素的值，将三个值中最大的放到$Y[m, n]$位置。若新元素值最大，则调用结束。否则在$Y[m - 1, n]$、$Y[m, n - 1]$其中较大值的位置上，递归调用插入新元素的过程。
+
+e. 调用d的过程，在Young氏矩阵中插入$n^2$个元素，总共消耗时间$n^2\cdot \Omicron(n + n)=\Omicron(n^3)$。再调用c的过程，每次调用消耗$\Omicron(n+n)=\Omicron(n)$，将$n^2$个元素从小到大取出，因此总的时间复杂度为$\Omicron(n^3)$。
+
+f.
+
+```code
+FIND-YOUNG(A, m, n, v)
+    if m < 1 or n < 1 or A[m, n] < v
+        return NIL
+    if A[m, n] == v
+        return True
+    p = FIND-YOUNG(A, m - 1, n, v)
+    if p is NIL
+        p = FIND-YOUNG(A, m, n - 1, v)
+    if p is NIL
+        return NIL
+    return True
+```
+
+--------------------------------------
