@@ -1,5 +1,10 @@
-# https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2gy9m/
+#
+# @lc app=leetcode.cn id=26 lang=python3
+#
+# [26] 删除排序数组中的重复项
+#
 
+# @lc code=start
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
         if len(nums) > 1:
@@ -17,3 +22,5 @@ class Solution:
             return newSize
         else:
             return len(nums)
+# @lc code=end
+

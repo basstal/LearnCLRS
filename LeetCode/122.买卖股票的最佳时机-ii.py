@@ -1,5 +1,10 @@
-# https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2zsx1/
+#
+# @lc app=leetcode.cn id=122 lang=python3
+#
+# [122] 买卖股票的最佳时机 II
+#
 
+# @lc code=start
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         n = len(prices)
@@ -10,3 +15,5 @@ class Solution:
                 sum += prices[i+1] - prices[i]
             i += 1
         return sum
+# @lc code=end
+

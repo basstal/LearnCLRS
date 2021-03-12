@@ -1,4 +1,10 @@
-# https://leetcode-cn.com/problems/basic-calculator-ii/
+#
+# @lc app=leetcode.cn id=227 lang=python3
+#
+# [227] 基本计算器 II
+#
+
+# @lc code=start
 class Solution:
     optStack = {}
     numStack = {}
@@ -64,12 +70,5 @@ class Solution:
         self.numTop = 0
         self.prevIsNum = False
         return self.numStack[1]
+# @lc code=end
 
-
-s = Solution()
-print(s.calculate("3+2*2"))
-print(s.calculate(" 3+ 2 *2 "))
-print(s.calculate(" 3* 2 +2 "))
-print(s.calculate(" 48 "))
-print(s.calculate("1*2-3/4+5*6-7*8+9/10"))
-print(s.calculate("1+2*5/3+6/4*2"))
