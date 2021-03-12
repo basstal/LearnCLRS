@@ -317,5 +317,70 @@ c. 上式中$X_1、X_2、X_3...X_n$均为$1/n$，因此展开后把同项相加�
 
 $$E[T(n)]=\frac{2}{n}\sum_{q=2}^{n-1}E[T(q)]+\Theta(n)$$
 
-d. 
+d. [答案参考，没看懂，所以懒得写了，涉及到不定积分的内容有些忘了要补一下](https://walkccc.me/CLRS/Chap07/Problems/7-3/)
 
+e. 要证明$E[T(n)]\leq an\lg n$，将$T(q)\leq q\lg q + \Theta(n)$代入
+
+$E[T(n)]=\frac{2}{n} \sum_{q=2}^{n-1}E[T(q)]+\Theta(n)$
+
+$\leq \frac{2}{n} \sum_{q=2}^{n-1}(q\lg q + \Theta(n)) + \Theta(n)$
+
+$\leq \frac{2}{n} \sum_{q=2}^{n-1} q\lg q + \frac{2}{n}\Theta(n) + \Theta(n)$
+
+$\leq \frac{2}{n}(\frac{1}{2}n^2\lg n - \frac{1}{8}n^2) + \Theta(n)$
+
+$=n\lg n - \frac{1}{4}n+\Theta(n)$
+
+$=n\lg n + \Theta(n)$
+
+------------------------------
+
+## 思考题7-4
+
+Q：
+
+![ThinkP7_4.png](Resources/ThinkP7_4.png)
+
+A：
+
+a. 由循环不变式可以证明，此处只给出形式化的证明。假设TAIL-RECURSIVE-QUICKSORT能正确排序$A[p .. r]$的值，每次PARTITION可以正确排序1个值$q$，对所有在$q$左边的值，递归调用TAIL-RECURSIVE-QUICKSORT使他们正确排序，而所有在$q$右边的值，则由while循环来保证在以后的迭代中他们都能够被正确的分配到$q$的左边。因此，当$q+1 \ge r$时，推得$q$左边的值（包含$q$）都已正确排序，$q$右边至多只有1个值且大于或等于$q$。所以$A[p .. r]$是有序的。
+
+b. 栈深度是$\Theta(n)$，即while循环执行次数为数组大小$n$，可推得每次PARTITION得到的$q$比上一次大1。对于一个严格递增的数组并且PARTITION选择首或尾元素作为主元时可以出现这种情况。
+
+------------------------------
+
+## 思考题7-5
+
+Q：
+
+![ThinkP7_5.png](Resources/ThinkP7_5.png)
+
+A：
+
+a. 从$n$个数中选择3个相同的数有6种排列方式，因此概率$\large p_i=6 \frac{1}{n} \frac{i-1}{n-1} \frac{n-i}{n-2}(i=2, 3, ..., n-1)$
+
+b. 平凡实现的概率为$1/n$，将$i=\lfloor(n+1)/2\rfloor$代入上式得
+
+与平凡实现相比概率增加$\Large \frac{6(\lfloor{\frac{n-1}{2}}\rfloor)(n-\lfloor{\frac{n+1}{2}\rfloor})}{n(n-1)(n-2)}-\frac{1}{n}$
+
+当$n \to \infty$时，概率极限值为$3/2$。
+
+c. $\Large \sum_{i=n/3}^{2n/3} \approx \int_{n/3}^{2n/3}\frac{6(-x^2+nx+n-n)}{n(n-1)(n-2)}dx$
+
+$\Large =\frac{6(-7n^3/81+3n^3/18+3n^2/18-n^2/3)}{n(n-1)(n-2)}$
+
+当$n \to \infty$时，上式值为$13/27>1/3$，即比平凡实现概率高。
+
+d. 划分中选取的主元，仅决定了划分不平衡的程度。快速排序的时间复杂度，依然由树深度$\Theta(\lg n)$和每次划分时元素比较次数$\Theta(n)$决定，因此，该方法只影响其时间复杂度$\Omega(n\lg n)$的常数项因子。
+
+------------------------------
+
+## 思考题7-6
+
+Q：
+
+![ThinkP7_6.png](Resources/ThinkP7_6.png)
+
+A：
+
+------------------------------
