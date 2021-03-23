@@ -250,7 +250,7 @@ $= ck \lg k - (c-1)k$
 
 $\geq ck \lg k$，当$c\geq 1$时成立。
 
-e. 
+e. TODO:
 
 ------------------------------
 
@@ -262,32 +262,27 @@ Q：
 
 A：
 
-a.
-
-计数排序
+a. 计数排序
 
 b.
 
-```
-i = 0
-for k = 1 to n
-    if A[k] == 0
-        i += 1
-for k = 1 to n
-    if i > 0
-        A[k] = 0
+```code
+i = 1
+j = n
+while i <= j
+    if A[i] > A[j]
+        exchange A[i] with A[j]
+        i = i + 1
+        j = j - 1
+    elseif A[i] == 1
+        j = j - 1
     else
-        A[k] = 1
-    i -= 1
+        i = i + 1
 ```
 
-c.
+c. 插入排序
 
-插入排序
-
-d.
-
-b方案不是稳定的，因此不能作为RADIX-SORT的第2行基础排序方法。
+d. 
 
 e.
 
