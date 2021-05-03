@@ -130,83 +130,220 @@ A：INSERT可以，DELETE不行。
 
 ## 10.2-2
 
-在单链表的头部PUSH和POP即可
+Q：用一个单链表L实现一个栈。要求操作PUSH和POP的运行时间仍为$\Omicron(1)$。
+
+A：
+
+```code
+PUSH(L, n)
+    n.next = L.next
+    L.next = n
+```
+
+```code
+POP(L)
+    result = L.next
+    L.next = L.next.next
+    return result
+```
 
 ---------------------------
 
 ## 10.2-3
 
-用两个指针分别代表head和tail，ENQUEUE时将head的next和head指向入队的元素，DEQUEUE时出队tail当前指向的元素并将tail指向tail的next
+Q：用一个单链表L实现一个队列。要求操作ENQUEUE和DEQUEUE的运行时间仍为$\Omicron(1)$。
+
+A：
+
+增加一个指针指向单链表的尾结点
+
+```code
+ENQUEUE(L, n)
+    L.tail.next = n
+    L.tail = n
+```
+
+```code
+DEQUEUE(L)
+    result = L.next
+    L.next = result.next
+    return result
+```
 
 ---------------------------
 
 ## 10.2-4
 
-暂时令L.nil的key为k，在最后判断x和L.nil是否为同一个结点即可。
+Q：如前所述，LIST-SEARCH'过程中的每一次循环迭代都需要两个测试：一是检查$x\neq L.nil$，另一个是检查$x.key \neq k$。试说明如何在每次迭代中省略对$x \neq L.nil$的检查。
+
+A：将L.nil设置为一个key为k的结点，在最后判断x和L.nil是否为同一个结点即可。
 
 ---------------------------
 
 ## 10.2-5
 
-    INSERT(L, key):
-    nex = L.nil.next
-    pre = nex
-    nex = nex.next
-    while nex != L.nil
-        if pre.key <= key and nex.key >= key
-            new node.key = key
-            pre.next = node
-            node.next = nex
-            return
-        pre = nex
-        nex = nex.next
-    
-    DELETE(L, key):
-    f = L.nil
-    pre = f
-    f = f.next
-    while f != L.nil and f.key <= key
-        if f.key == key
-            pre.next = f.next
-            remove f from L
-            return
-        pre = f
-        f = f.next
+Q：使用单向循环链表实现字典操作INSERT、DELETE和SEARCH，并给出所写过程的运行时间。
 
-    SEARCH(L, key):
-    f = L.nil.next
-    while f != L.nil and f.key <= key
-        if f.key == key
-            return f
-        f = f.next
+A：
+```code
+INSERT(L, x)
+    x.next = L.nil.next
+    L.nil.next = x
+```
 
-时间复杂度都为:$\Omicron(n)$
+时间复杂度为$\Omicron(1)$。
+
+```code    
+DELETE(L, x)
+    find = L.nil
+    pre = find
+    find = find.next
+    while find != L.nil
+        if find == x
+            pre.next = find.next
+            return
+        pre = find
+        find = find.next
+```
+
+时间复杂度为$\Omicron(n)$。
+
+```code
+SEARCH(L, key)
+    search = L.nil.next
+    while search != L.nil
+        if search.key == key
+            return search
+        search = search.next
+    return NIL
+```
+
+时间复杂度为$\Omicron(n)$。
 
 ---------------------------
 
 ## 10.2-6
 
-链表，把两个链表的首尾链接起来构成一个链表包含$S_1$和$S_2$的所有元素。
+Q：动态集合操作UNION以两个不相交的集合$S_1$和$S_2$作为输入，并返回集合$S=S_1\cup S_2$，包含$S_1$和$S_2$的所有元素。该操作通常会破坏集合$S_1$和$S_2$。试说明如何选用一种合适的表类数据结构，来支持$\Omicron(1)$时间的UNION操作。
+
+A：双向循环链表，把两个链表的首尾分别连接起来构成一个包含$S_1$和$S_2$所有元素的双向循环链表。
 
 ---------------------------
 
 ## 10.2-7
 
-用两个指针，把prev和next的指针反向链接起来，head指向最后一个元素即可。
+Q：给出一个$\Theta(n)$时间的非递归过程，实现对一个含$n$个元素的单链表的逆转。要求除存储链表本身所需的空间外，该过程只能使用固定大小的存储空间。
+
+A：用三个指针，分别指向单链表中顺序连接的三个结点，把前两个结点的链接反转，再将三个指针分别往原链表尾方向推一个位置，重复该过程直到最后一个指针指向NIL，此时反转前两个指针即可得到逆转的单链表。
+
+---------------------------
+
+## 10.2-8
+
+Q：说明如何在每个元素仅使用一个指针$x.np$（而不是通常的两个指针$next$和$prev$）的情况下实现双向链表。假设所有指针的值都可视为$k$位的整型数，且定义$x.np=x.next XOR x.prev$，即$x.next$和$x.prev$的$k$位异或。（NIL的值用0表示。）注意要说明获取表头所需的信息，并说明如何在该表上实现SEARCH、INSERT和DELETE操作，以及如何在$\Omicron(1)$时间内实现该表的逆转。
+
+A：
+
+---------------------------
+
+## 10.3-1
+
+Q：画图表示序列<13, 4, 8, 19, 5, 11>，其存储形式为多数组表示的双向链表。同样画出单数组表示的形式。
+
+A：![A3_1.jpg](./Resources/A3_1.jpg)
 
 ---------------------------
 
 ## 10.3-2
 
-与多数组表示法类似，不过是next从key下标位移+1的位置处拿到。
+Q：对一组同构对象用单数组表示法实现，写出过程ALLOCATE-OBJECT和FREE-OBJECT。
+
+A：
+
+```code
+ALLOCATE-OBJECT()
+    if free == NIL
+        error 'out of space'
+    else
+        x = free
+        free = A[x+1]
+        return x
+```
+
+```code
+FREE-OBJECT(x)
+    A[x+1] = free
+    free = x
+```
 
 ---------------------------
 
 ## 10.3-3
 
-ALLOCATE-OBJECT不需要设置prev是将获取到的free结点插入到双向链表中时会按照插入位置初始化prev的值；FREE-OBJECT不需要重置prev是因为单链表没有使用prev中的值。
+Q：在ALLOCATE-OBJECT和FREE-OBJECT过程的实现中，为什么不需要设置或重置对象的prev属性呢？
+
+A：ALLOCATE-OBJECT不需要设置prev是因为，获取到的free结点插入到双向链表中时会按照插入位置初始化prev的值；FREE-OBJECT不需要重置prev是因为单链表没有使用prev中的值。
 
 ---------------------------
+
+## 10.3-4
+
+Q：我们往往希望双向链表的所有元素在存储器中保持紧凑，例如，在多数组表示中占用前$m$个下标位置。（在页式虚拟存储的计算环境下，即为这种情况。）假设除指向链表本身的指针外没有其他指针指向该链表的元素，试说明如何实现过程ALLOCATE-OBJECT和FREE-OBJECT，使得该表示保持紧凑。（提示：使用栈的数组实现。）
+
+A：
+
+维护一个指向已分配数组栈顶下标值m
+
+```code
+ALLOCATE-OBJECT()
+    m = m + 1
+    if m > A.length
+        error 'out of space'
+    else
+        return m
+```
+
+```code
+FREE-OBJECT(x)
+    x.next = A[m].next
+    x.prev = A[m].prev
+    x.key = A[m].key
+    m = m - 1
+```
+
+---------------------------
+
+## 10.3-5
+
+Q：设L是一个长度为$n$的双向链表，存储于长度为$m$的数组key、prev和next中。假设这些数组由维护双链自由表F的两个过程ALLOCATE-OBJECT和FREE-OBJECT进行管理。又假设$m$个元素中，恰有$n$个元素在链表L上，$m-n$个在自由表上。给定链表L和自由表F，试写出一个过程COMPACTIFY-LIST(L, F)，用来移动L中的元素使其占用数组中$1, 2, ..., n$的位置，调整自由表F以保持其正确性，并且占用数组中$n+1, n+2, ..., m$的位置。要求所写的过程运行时间应为$\Theta(n)$，且只使用固定量的额外存储空间。请证明所写的过程是正确的。
+
+A：
+
+```code
+COMPACTIFY-LIST(L, F)
+    next = L
+    prev = nil
+    next_f = F
+    prev_f = nil
+    while next != nil
+        if next > n
+            while next_f > n
+                prev_f = next_f
+                next_f = next_f.next
+            prev_f.next = next
+            prev.next = next_f
+            exchange next_f.next with next.next
+            next_f.key = next.key
+            next_f.prev = next.prev
+        prev = next
+        next = next.next
+```
+
+可使用循环不变式证明，此处只给出形式化的证明。过程将每一个L中位置大于n的元素与F中位置小于或等于n的元素进行交换，并且保持L中该被交换元素prev结点的next下标正确性，以及F中该被交换元素prev结点的next下标正确性。因此循环结束后，L中元素占用数组$1, 2, ..., n$的位置，且F中元素占用数组$n+1, n+2, ..., m$的位置。
+
+---------------------------
+
+
 
 ## 10.4-2
 
