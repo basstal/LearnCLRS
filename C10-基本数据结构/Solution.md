@@ -343,34 +343,88 @@ COMPACTIFY-LIST(L, F)
 
 ---------------------------
 
+## 10.4-1
 
+Q：画出下列属性表所示的二叉树，其根结点下标为6.
+
+![P4_1.png](./Resources/P4_1.png)
+
+A：![A4_1.jpg](./Resources/A4_1.jpg)
+
+---------------------------
 
 ## 10.4-2
 
-    RECURSIVE-TRAVERSE(root)
-        if root != NIL
-            print root
-            RECURSIVE-TRAVERSE(root->left)
-            RECURSIVE-TRAVERSE(root->right)
+Q：给定一个$n$结点的二叉树，写出一个$\Omicron(n)$时间的递归过程，将该树每个结点的关键字输出。
+
+A：
+
+```code
+RECURSIVE-TRAVERSE(n)
+    if n != NIL
+        print n.key
+        RECURSIVE-TRAVERSE(n.left)
+        RECURSIVE-TRAVERSE(n.right)
+```
 
 ---------------------------
 
 ## 10.4-3
 
-    NON-RECURSIVE-TRAVERSE(root)
-        if root == NIL
-            return
-        stack.push(root)
-        while stack not empty
-            cur = stack.pop()
-            print cur
-            if cur->left != NIL
-                stack.push(cur->left)
-            if cur-right != NIL
-                stack.push(cur->right)
+Q：给定一个$n$结点的二叉树，写出一个$\Omicron(n)$时间的非递归过程，将该树每个结点的关键字输出。可以使用一个栈作为辅助数据结构。
+
+A：
+
+```code
+NON-RECURSIVE-TRAVERSE(n)
+    if n == NIL
+        return
+    PUSH(S, n)
+    while S not empty
+        elem = POP(S)
+        print elem.key
+        if elem.left != NIL
+            PUSH(S, elem.left)
+        if elem.right != NIL
+            PUSH(S, elem.right)
+```
 
 ---------------------------
 
 ## 10.4-4
 
-与10.4-3过程一致，只是字段名有变化
+Q：对于一个含$n$个结点的任意有根树，写出一个$\Omicron(n)$时间的过程，输出其所有关键字。该树以左孩子右兄弟表示法存储。
+
+A：
+
+```code
+NON-RECURSIVE-TRAVERSE(n)
+    if n == NIL
+        return
+    PUSH(S, n)
+    while S not empty
+        elem = POP(S)
+        print elem.key
+        if elem.left_child != NIL
+            PUSH(S, elem.left_child)
+        if elem.right_sibling != NIL
+            PUSH(S, elem.right_sibling)
+```
+
+---------------------------
+
+## 10.4-5 
+
+Q：给定一个$n$结点的二叉树，写出一个$\Omicron(n)$时间的非递归过程，将该树每个结点的关键字输出。要求除该树本身的存储空间外只能使用固定量的额外存储空间，且在过程中不得修改该树，即使是暂时的修改也不允许。
+
+A：
+
+---------------------------
+
+## 10.4-6
+
+Q：任意有根树的左孩子右兄弟表示法中每个结点用到三个指针：left-child、right-sibling和parent。对于任何结点，都可以在常数时间到达其父节点，并在与其孩子数呈线性关系的时间内到达所有孩子结点。说明如何在每个结点中只使用两个指针和一个布尔值的情况下，使结点的父结点或者其所有孩子结点可以在与其孩子数呈线性关系的时间内到达。
+
+A：
+
+---------------------------
