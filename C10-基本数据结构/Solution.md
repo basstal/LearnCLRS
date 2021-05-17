@@ -428,3 +428,53 @@ Q：任意有根树的左孩子右兄弟表示法中每个结点用到三个指�
 A：
 
 ---------------------------
+
+## 思考题10-1
+
+Q：（链表间的比较）对于下表中的4种链表，所列的每种动态集合操作在最坏情况下的渐近运行时间是多少？
+
+A：
+
+||未排序的单链表|已排序的单链表|未排序的双向链表|已排序的双向链表|
+|---|---|---|---|---|
+|SEARCH(L, k)|$\Omicron(n)$|$\Omicron(n)$|$\Omicron(n)$|$\Omicron(n)$|
+|INSERT(L, x)|$\Omicron(1)$|$\Omicron(n)$|$\Omicron(1)$|$\Omicron(n)$|
+|DELETE(L, x)|$\Omicron(n)$|$\Omicron(n)$|$\Omicron(1)$|$\Omicron(1)$|
+|SUCCESSOR(L, x)|$\Omicron(n)$|$\Omicron(n)$|$\Omicron(n)$|$\Omicron(n)$|
+|PREDECESSOR(L, x)|$\Omicron(n)$|$\Omicron(n)$|$\Omicron(n)$|$\Omicron(n)$|
+|MINIMUM(L)|$\Omicron(n)$|$\Omicron(1)$|$\Omicron(n)$|$\Omicron(1)$|
+|MAXIMUM(L)|$\Omicron(n)$|$\Omicron(1)$|$\Omicron(n)$|$\Omicron(1)$|
+
+---------------------------
+
+## 思考题10-2
+
+Q：
+
+![ThinkP10_2.png](Resources/ThinkP10_2.png)
+
+A：
+
+此处假定链表是按非递减顺序排序。
+
+||MAKE-HEAP|INSERT|MINIMUM|EXTRACT-MIN|UNION|
+|---|---|---|---|---|---|
+|a|-|遍历并比较链表元素查找插入位置|链表首元素|提取链表首元素|从待合并的两个链表表头开始，逐步比较元素大小，将较小的元素链接到合并链表的尾部，若遇到相同元素则只合并其中一个，抛弃另一个|
+|a时间|$\Omicron(1)$|$\Omicron(n)$|$\Omicron(1)$|$\Omicron(1)$|$\Omicron(n)$|
+|b|找到最小元素并放到链表头|如果待插入元素比头部元素小，则插入在头部，否则插入在头部之后|链表首元素|提取链表首元素，并找到剩余元素中最小元素放到链表头|与a大致相同，不同处在于合并后，原链表需要找到剩余元素中的最小元素放到表头|
+|b时间|$\Omicron(n)$|$\Omicron(1)$|$\Omicron(1)$|$\Omicron(n)$|$\Omicron(n^2)$|
+|c|与b一致|与b一致|与b一致|与b一致|直接比较待合并链表的表头，将表头较小的作为新表头，表头较大的链接到合并链表的末尾|
+|c时间|$\Omicron(n)$|$\Omicron(1)$|$\Omicron(1)$|$\Omicron(n)$|$\Omicron(n)$|
+
+
+---------------------------
+
+## 思考题10-3
+
+Q：
+
+![ThinkP10_3.png](Resources/ThinkP10_3.png)
+
+A：
+
+---------------------------

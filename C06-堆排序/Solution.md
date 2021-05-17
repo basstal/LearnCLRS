@@ -356,7 +356,7 @@ A：
 
 ## 6.5-8
 
-Q：$HEAP-DELETE(A, i)$操作能够将结点$i$从堆A中删除。对于一个包含$n$个元素的堆，请设计一个能够在$\Omicron(\lg n)$时间内完成的HEAP-DELETE操作。
+Q：HEAP-DELETE(A, i)操作能够将结点$i$从堆A中删除。对于一个包含$n$个元素的堆，请设计一个能够在$\Omicron(\lg n)$时间内完成的HEAP-DELETE操作。
 
 A：
 
